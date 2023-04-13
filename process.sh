@@ -1,23 +1,8 @@
 #! /bin/bash
 
-# Arguments
-input="$1"
-output="formatted_${input}"
+for i in chunk_aa chunk_ab chunk_ac chunk_ad chunk_ae: do tr '[:upper:]' '[:lower:]' | sed -e 's/[[:punct:]]//g' | sed -e 's/[\t]/\n/g' | grep -v "^\s*$" | sort; done
 
-# Make all letters lowercase
-tr '[:upper:]' '[:lower:]' < "$input" > "$output"
 
-# Remove punctuation
-sed -i 's/[:punct:]//g' "$output"
 
-# Make it have one word per line
-sed -i 's/[[:space:]]+/\n/g' "$output"
 
-# Remove blank lines
-grep -v "^[[:space:]]*$" "$output" > "$output.tmp" && mv "$output.tmp" "$output"
 
-# Sort the file of words
-sort "$output" -o "$output"
-
-# Output the formatted file name
-echo "$output"
