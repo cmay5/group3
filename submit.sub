@@ -1,22 +1,21 @@
 universe = vanilla
 
-# Set the input, output, and error log files
 input = $(item)
 output = $(item)_output.txt
 error = $(item)_error.txt
 
-# Job for the first script (extract_tar.sh)
-executable = extract_tar.sh
+# Job for the first script (pre.sh)
+executable = pre.sh
 arguments = shakespeare.tar
 queue
 
-# Job for the second script (merge_and_split.sh)
-executable = merge_and_split.sh
+# Job for the second script (process.sh)
+executable = process.sh
 arguments = shakespeare
 queue
 
-# Job for the third script (word_count.sh)
-executable = word_count.sh
+# Job for the third script (post.sh)
+executable = post.sh
 arguments = $(item)
 queue item from file_list.txt
 
